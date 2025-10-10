@@ -1,0 +1,7 @@
+nextcord[voice]
+pynacl
+python-dotenv
+cffi
+setuptools
+wheel
+gtts

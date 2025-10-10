@@ -24,6 +24,10 @@ _A modular Discord bot for voice channel TTS reminders with clean architecture._
 
 **Audio Backend:** FFmpeg with PulseAudio support
 
+## Development
+
+`make setup`: Will direnv allow, set up the venv and install dependencies
+
 ## Features
 
 Since this is a specialized Discord bot, I built it with specific functionality in mind:
