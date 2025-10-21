@@ -1,6 +1,6 @@
 import nextcord
 from nextcord.ext import commands
-import logging
+#import logging
 import os
 import asyncio
 from dotenv import load_dotenv
@@ -22,25 +22,25 @@ class ReminderBot(commands.Bot):
             help_command=None
         )
         
-        self.setup_logging()
+        #self.setup_logging()
     
-    def setup_logging(self):
-        """Configure logging for the bot"""
-        handler = logging.FileHandler(
-            filename='discord.log', 
-            encoding='utf-8', 
-            mode='w'
-        )
+    #def setup_logging(self):
+        #"""Configure logging for the bot"""
+        #handler = logging.FileHandler(
+            #filename='discord.log', 
+            #encoding='utf-8', 
+            #mode='w'
+        #)
         
-        logging.basicConfig(
-            handlers=[handler],
-            level=logging.INFO,
-            format='%(asctime)s:%(levelname)s:%(name)s: %(message)s'
-        )
+        #logging.basicConfig(
+            #handlers=[handler],
+            #level=logging.INFO,
+            #format='%(asctime)s:%(levelname)s:%(name)s: %(message)s'
+        #)
         
         # Reduce nextcord logging verbosity
-        logging.getLogger('nextcord').setLevel(logging.WARNING)
-        logging.getLogger('nextcord.http').setLevel(logging.WARNING)
+        #logging.getLogger('nextcord').setLevel(logging.WARNING)
+        #logging.getLogger('nextcord.http').setLevel(logging.WARNING)
     
     async def setup_hook(self):
         """Called when the bot is starting up"""
@@ -151,6 +151,19 @@ class ReminderBot(commands.Bot):
 
         print("Bot is ready and operational!")
         print("=" * 50)
+        
+        import subprocess
+        print("="*50)
+        print("Checking FFmpeg installation...")
+        try:
+            result = subprocess.run(['which', 'ffmpeg'], capture_output=True, text=True)
+            print(f"FFmpeg location: {result.stdout.strip()}")
+
+            result = subprocess.run(['ffmpeg', '-version'], capture_output=True, text=True)
+            print(f"FFmpeg version: {result.stdout.split('version')[1].split()[0] if 'version' in result.stdout else 'unknown'}")
+        except Exception as e:
+            print(f"ERROR: FFmpeg check failed: {e}")
+        print("="*50)
     
     async def on_application_command_error(self, interaction, error):
         """Handle slash command errors"""

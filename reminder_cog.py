@@ -83,6 +83,7 @@ class ReminderManager(commands.Cog):
                 print("Reconnecting to voice channel...")
                 if voice_client:
                     await voice_client.disconnect()
+                nextcord.VoiceClient.use_ipv6 = False
                 voice_client = await voice_channel.connect()
                 await asyncio.sleep(1)
             
@@ -161,11 +162,17 @@ class ReminderManager(commands.Cog):
         
         # Connect to voice channel
         try:
-            voice_client = await voice_channel.connect()
+            voice_client = await voice_channel.connect(timeout=60.0, reconnect=True)
+            print(f"Connected to voice channel: {voice_channel.name}")
             await asyncio.sleep(1)
+
+            # Verify connection
+            print(f"Voice client connected: {voice_client.is_connected()}")
+            print(f"Voice client channel: {voice_client.channel}")
 
             #Create TTS audio file
             audio_file = await AudioUtils.create_tts_file(message, interaction.user.id)
+            print(f"Audio file ready: {audio_file}")
 
             # Test Audio Playback
             if not await AudioUtils.test_audio_playback(voice_client, audio_file):

@@ -1,7 +1,12 @@
+# Discord library with voice support
 nextcord[voice]
+
+# Audio processing
 pynacl
-python-dotenv
 cffi
+
+# Python utilities
 setuptools
 wheel
 gtts
+python-dotenv

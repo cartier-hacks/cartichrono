@@ -1,5 +1,7 @@
 # Discord TTS Reminder Bot
 
+![screenshot](CartiChrono.png)
+
 A Discord bot that provides recurring text-to-speech reminders in voice channels using Python and the nextcord library.
 
 _A modular Discord bot for voice channel TTS reminders with clean architecture._
